@@ -12,16 +12,16 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reserva {
+public class ReservaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Cliente cliente;
+    private ClienteEntity cliente;
 
     @ManyToOne
-    private Espaco espaco;
+    private EspacoEntity espaco;
 
     private LocalDateTime dataInicio;
     private LocalDateTime dataFim;

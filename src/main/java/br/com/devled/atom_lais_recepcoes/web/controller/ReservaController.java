@@ -1,6 +1,6 @@
 package br.com.devled.atom_lais_recepcoes.web.controller;
 
-import br.com.devled.atom_lais_recepcoes.domain.entity.Reserva;
+import br.com.devled.atom_lais_recepcoes.domain.entity.ReservaEntity;
 import br.com.devled.atom_lais_recepcoes.service.ReservaService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +18,14 @@ public class ReservaController {
 
     @Operation(summary = "Listar todas as reservas")
     @GetMapping
-    public List<Reserva> listarReservas() {
+    public List<ReservaEntity> listarReservas() {
         return reservaService.getReservas();
     }
 
     @Operation(summary = "Criar uma nova reserva")
     @PostMapping
-    public ResponseEntity<Reserva> criarReserva(@RequestBody Reserva reserva) {
-        Reserva novaReserva = reservaService.criarReserva(reserva);
+    public ResponseEntity<ReservaEntity> criarReserva(@RequestBody ReservaEntity reserva) {
+        ReservaEntity novaReserva = reservaService.criarReserva(reserva);
         return ResponseEntity.ok(novaReserva);
     }
 }

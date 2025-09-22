@@ -7,7 +7,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Espaco {
+public class EspacoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

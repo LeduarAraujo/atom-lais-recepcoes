@@ -35,7 +35,7 @@ CREATE TABLE pagamentos (
     reserva_id INT NOT NULL,
     data_pagamento TIMESTAMP NOT NULL,
     valor DECIMAL(10, 2) NOT NULL,
-    tipo_pagamento VARCHAR(50) CHECK (tipo_pagamento IN ('Dinheiro', 'Cartão', 'Transferência')) NOT NULL,
+    tipo_pagamento VARCHAR(50) CHECK (tipo_pagamento IN ('Dinheiro', 'Cartão', 'PIX')) NOT NULL,
     FOREIGN KEY (reserva_id) REFERENCES reservas(id)
 );
 

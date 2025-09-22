@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pagamento {
+public class PagamentoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Reserva reserva;
+    private ReservaEntity reserva;
 
     private LocalDateTime dataPagamento;
     private Double valor;
