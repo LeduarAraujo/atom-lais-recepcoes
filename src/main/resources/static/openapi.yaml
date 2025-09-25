@@ -1,0 +1,583 @@
+openapi: 3.0.3
+info:
+  title: Lais Recepcoes API - OpenAPI 3.0
+  description: API para gerenciamento de reservas dos espacos.
+  contact:
+    email: leduar.araujo@hotmail.com
+  version: 1.0.0
+
+tags:
+  - name: Cliente
+    description: Dados relacionados aos clientes
+  - name: Espaco
+    description: Dados relacionados aos espacos
+  - name: Reserva
+    description: Dados das reservas
+  - name: Contrato
+    description: Contratos dos Espacos
+
+paths:
+  /cliente:
+    post:
+      operationId: cadastrarCliente
+      tags:
+        - Cliente
+      summary: Cadastro do Cliente
+      description: Realiza o cadastro do cliente que reservou a festa.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CadastrarClienteRequest'
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CadastrarClienteResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    put:
+      operationId: atualizarCliente
+      tags:
+        - Cliente
+      summary: Atualiza dados do Cliente
+      description: Atualiza o cadastro do cliente que reservou a festa.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AtualizarClienteRequest'
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtualizarClienteResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+
+  /cliente/{cpfCliente}:
+    get:
+      operationId: consultarClientePorCpf
+      tags:
+        - Cliente
+      summary: Consulta cliente por cpf
+      description: Consulta o cliente por cpf
+      parameters:
+        - name: cpfCliente
+          in: path
+          required: true
+          description: Cpf do cliente
+          schema:
+            type: string
+            example: 12345678944
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsultarClienteResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  
+  /cliente-observacao:
+    post:
+      operationId: incluirObservacaoCliente
+      tags:
+        - Cliente
+      summary: Incluir uma observacao sobre o cliente
+      description: Inclui uma observacao relacionada ao cliente
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncluirObservacaoClienteRequest'
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncluirObservacaoClienteResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    put:
+      operationId: atualizarObservacaoCliente
+      tags:
+        - Cliente
+      summary: Atualiza observacao do cliente
+      description: Atualiza uma observacao relacionada ao cliente
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AtualizarObservacaoClienteRequest'
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtualizarObservacaoClienteResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  
+  /cliente-observacao/{cpfCliente}:
+    get:
+      operationId: consultarObservacaoCliente
+      tags:
+        - Cliente
+      summary: Consulta observacao cliente
+      description: Consulta a observacao que o cliente tem
+      parameters:
+        - name: cpfCliente
+          in: path
+          required: true
+          description: Cpf do cliente
+          schema:
+            type: string
+            example: 12345678944
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsultarObservacaoClienteResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    delete:
+      operationId: excluirObservacaoCliente
+      tags:
+        - Cliente
+      summary: Excluir observacao cliente
+      description: Exclui uma observacao do cliente
+      parameters:
+        - name: cpfCliente
+          in: path
+          required: true
+          description: Cpf do cliente
+          schema:
+            type: string
+            example: 12345678944
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    
+  
+  /espaco:
+    post:
+      operationId: cadastrarEspaco
+      tags:
+        - Espaco
+      summary: Cadastro Espaco
+      description: responsavel pelo cadastro dos espacos de festas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CadastrarEspacoRequest'
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CadastrarEspacoResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+                
+    put:
+      operationId: atualizarEspaco
+      tags:
+        - Espaco
+      summary: Atualiza Espaco
+      description: responsavel pela atualização dos dados dos espacos de festas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AtualizarEspacoRequest'
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AtualizarEspacoResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    get:
+      operationId: listarEspacos
+      tags:
+        - Espaco
+      summary: Listar Espaco
+      description: responsavel por retornar todos os espacos
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListarEspacoResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  
+  /diaria-espaco:
+    get:
+      operationId: consultarValorDia
+      tags:
+        - Espaco
+      summary: Listar Espaco
+      description: responsavel por retornar todos os espacos
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListarEspacoResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    post:
+      operationId: incluirValorDia
+    put:
+      operationId: atualizarValorDia
+    
+  
+  /contrato:
+    post:
+      operationId: incluirContratoPorEspaco
+      tags:
+        - Contrato
+      summary: Incluir dados contrato
+      description: inclui o texto que será usado no contrato dos espacos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncluirContratoEspacoRequest'
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncluirContratoEspacoResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+    put:
+      operationId: atualizarContratoPorEspaco
+      tags:
+        - Contrato
+      summary: Atualizar dados contrato
+      description: Atualiza o texto que será usado no contrato dos espacos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlterarContratoEspacoRequest'
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlterarContratoEspacoResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  
+  /contrato/{idEspaco}:
+    get:
+      operationId: listarContratosPorEspaco
+      tags:
+        - Contrato
+      summary: Listar contratos por espaco
+      description: Lista o texto que será usado no contrato dos espacos
+      parameters:
+        - name: idEspaco
+          in: path
+          required: true
+          description: id do espaco retornara os contratos
+          schema:
+            type: string
+            example: 1
+        
+      responses:
+        '200': 
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsultarContratoEspacoResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  
+  
+  
+  
+  
+components:
+  schemas:
+    CadastrarClienteRequest:
+    CadastrarClienteResponse:
+    
+    AtualizarClienteRequest:
+    AtualizarClienteResponse:
+    
+    ConsultarClienteResponse:
+    
+    ##----
+    
+    CadastrarEspacoRequest:
+    CadastrarEspacoResponse:
+    
+    AtualizarEspacoRequest:
+    AtualizarEspacoResponse:
+    
+    ListarEspacoResponse:
+    
+    ##----
+    
+    IncluirContratoEspacoRequest:
+    IncluirContratoEspacoResponse:
+    
+    AlterarContratoEspacoRequest:
+    AlterarContratoEspacoResponse:
+    
+    ConsultarContratoEspacoResponse:
+    
+    ##----
+    
+    IncluirObservacaoClienteRequest:
+    IncluirObservacaoClienteResponse:
+    
+    AtualizarObservacaoClienteRequest:
+    AtualizarObservacaoClienteResponse:
+    
+    ConsultarObservacaoClienteResponse:
+    
+    ##----
+
+    IncluirReservaRequest:
+    IncluirReservaResponse:
+    
+    ConsultarReservaPorClienteResponse:
+    
+    ConsultarReservaPorDataResponse:
+    
+    ConsultaDatasDisponiveisPorEspacoRequest:
+    ConsultaDatasDisponiveisPorEspacoResponse:
+    
+    AlterarReservaRequest:
+    AlterarReservaResponse:
+
+    ##----
+    
+    RelatorioSemanalPorEspacoResponse:
+    
+    ##----
+  
+    IncluirValorDiarioPorEspacoRequest:
+    IncluirValorDiarioPorEspacoResponse:
+    
+    AtualizarValorDiarioPorEspacoRequest:
+    AtualizarValorDiarioPorEspacoResponse:
+    
+    ConsultarValorDiarioPorDataRequest:
+    ConsultarValorDiarioPorDataResponse:
+  
+    ##----
+    
+    PopularBasePorBatchRequest:
+    
+    ##----
+    
+    ConsultarReservasAnterioresPorClienteRequest:
+    ConsultarReservasAnterioresPorClienteResponse:
+  
+    
+    SuccessMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Sucesso"
+        code:
+          type: integer
+          example: 0
+
+    ErrorMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Error message"
+        errorCode:
+          type: integer
+          example: 123
+
+  securitySchemes:
+    gerenciador:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write: escrita
+            read: leitura
+
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
